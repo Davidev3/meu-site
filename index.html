@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfólio Davi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f2027;
+      --highlight: #00bcd4;
+      --hover: #0097a7;
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --text-muted: #666666;
+      --section-bg1: #ffffff;
+      --section-bg2: #e0f7fa;
+      --section-bg3: #f1f8e9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: var(--bg-dark);
+      padding: 1rem 0;
+      z-index: 1000;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    nav a {
+      color: var(--highlight);
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--hover);
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 40px 80px;
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition: all 0.8s ease-out;
+    }
+
+    section.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    #sobre { background-color: var(--section-bg1); color: var(--text-dark); }
+    #projetos { background-color: var(--section-bg2); color: var(--bg-dark); }
+    #contato { background-color: var(--section-bg3); color: var(--bg-dark); }
+
+    .section-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1000px;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .section-content img {
+      max-width: 300px;
+      border-radius: 10px;
+      flex: 1 1 300px;
+    }
+
+    #contato .section-content img {
+      margin: 0 auto;
+      display: block;
+    }
+
+    .text-block {
+      flex: 1 1 400px;
+    }
+
+    h1, h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h1 { font-size: 3em; }
+    h2 { font-size: 2.2em; }
+
+    p {
+      font-size: 1.1em;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: var(--highlight);
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: var(--hover);
+    }
+
+    input, textarea {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      color: var(--highlight);
+      text-decoration: none;
+    }
+
+    footer {
+      background: var(--bg-dark);
+      color: #aaa;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .section-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section-content img {
+        max-width: 90%;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <section id="sobre">
+    <div class="section-content">
+      <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1171&auto=format&fit=crop" alt="Ilustração sobre mim" />
+      <div class="text-block">
+        <h1><strong>Olá, eu sou Davi</strong></h1>
+        <p>"Transformo café em código e bugs em aprendizado. Sempre em busca do próximo desafio."</p>
+        <p>"Apaixonado por programação, Futuro engenheiro de software, Back e front End, procuro aprimorar meu conhecimento cada vez mais. Minhas linguagens de programação são HTML, CSS, JS, PYTHON, Tenho conhecimento para programação em nuvem, e estou nesse ramo a mais de um ano. </p> 
+        <a href="#contato" class="btn">Fale comigo</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="section-content">
+      <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Ilustração de projeto" />
+      <div class="text-block">
+        <h2><strong>Projetos</strong></h2>
+        <p><strong>App Academia Fitness</strong><br />
+        Projeto inicial de um aplicativo para academias, com foco em controle de treinos, metas e evolução do usuário. Desenvolvido com base em Python e integração com serviços em nuvem.</p>
+        <button class="btn" onclick="verMais()">Ver mais</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="section-content">
+      <img src="https://images.unsplash.com/photo-1587560699334-bea93391dcef?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ilustração de contato" />
+      <div class="text-block">
+        <h2><strong>Contato</strong></h2>
+        <form action="https://formsubmit.co/davistopa376@gmail.com" method="POST">
+          <input type="text" name="name" placeholder="Seu nome" required /><br />
+          <input type="email" name="email" placeholder="Seu email" required /><br />
+          <textarea name="message" rows="4" placeholder="Sua mensagem" required></textarea><br />
+          <button class="btn" type="submit">Enviar</button>
+        </form>
+        <div class="social-links">
+          <p>Ou me encontre aqui:</p>
+          <a href="https://github.com/Davidev3" target="_blank">GitHub</a>
+          <a href="https://linkedin.com/in/davi-stopa-a31094352" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Davi. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function verMais() {
+      alert("Em breve você poderá explorar todos os detalhes do app fitness! 💪");
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active'); // animação reversa ao sair da tela
+        }
+      });
+    }, {
+      threshold: 0.6
+    });
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+
