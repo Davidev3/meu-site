@@ -4,18 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfólio Davi</title>
+
+  <!-- Fontes e bibliotecas -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <style>
     :root {
-      --bg-dark: #0f2027;
-      --highlight: #00bcd4;
-      --hover: #0097a7;
+      --bg-dark: #081b29;
+      --highlight: #00abf0;
+      --hover: #00abf0;
       --text-light: #ffffff;
       --text-dark: #333333;
-      --text-muted: #666666;
+      --text-muted: #000000;
       --section-bg1: #ffffff;
-      --section-bg2: #e0f7fa;
-      --section-bg3: #f1f8e9;
+      --section-bg2: #f1f8e9;
+      --section-bg3: #e0f7fa;
     }
 
     * {
@@ -24,10 +29,11 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-dark);
       font-family: 'Poppins', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-light);
       scroll-behavior: smooth;
     }
 
@@ -41,9 +47,11 @@
       text-align: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
-
+.btn {
+  text-decoration: none;
+}
     nav a {
-      color: var(--highlight);
+      color: var(--text-light);
       margin: 0 20px;
       text-decoration: none;
       font-weight: 600;
@@ -52,7 +60,7 @@
     }
 
     nav a:hover {
-      color: var(--hover);
+      color: var(--highlight);
     }
 
     section {
@@ -61,19 +69,11 @@
       align-items: center;
       justify-content: center;
       padding: 140px 40px 80px;
-      opacity: 0;
-      transform: translateY(60px) scale(0.95);
-      transition: all 0.8s ease-out;
-    }
-
-    section.active {
-      opacity: 1;
-      transform: translateY(0) scale(1);
     }
 
     #sobre { background-color: var(--section-bg1); color: var(--text-dark); }
-    #projetos { background-color: var(--section-bg2); color: var(--bg-dark); }
-    #contato { background-color: var(--section-bg3); color: var(--bg-dark); }
+    #projetos { background-color: var(--section-bg2); color: var(--text-dark); }
+    #contato { background-color: var(--section-bg3); color: var(--text-dark); }
 
     .section-content {
       display: flex;
@@ -89,11 +89,6 @@
       max-width: 300px;
       border-radius: 10px;
       flex: 1 1 300px;
-    }
-
-    #contato .section-content img {
-      margin: 0 auto;
-      display: block;
     }
 
     .text-block {
@@ -114,19 +109,44 @@
       margin-bottom: 20px;
     }
 
-    .btn {
-      padding: 10px 20px;
-      background-color: var(--highlight);
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-size: 1em;
+    .btn,
+    button[type="submit"] {
+      padding: 1rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--highlight);
+      border: 2px solid var(--highlight);
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.5s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .btn:hover {
-      background-color: var(--hover);
+    .btn::before,
+    button[type="submit"]::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--highlight);
+      z-index: -1;
+      transition: 0.5s;
+    }
+
+    .btn:hover::before,
+    button[type="submit"]:hover::before {
+      width: 100%;
+    }
+
+    .btn:hover,
+    button[type="submit"]:hover {
+      color: var(--bg-dark);
     }
 
     input, textarea {
@@ -137,36 +157,60 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       font-family: 'Poppins', sans-serif;
+      color: var(--bg-dark);
     }
 
-    .social-links a {
-      margin: 0 10px;
+    label {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--bg-dark);
+      margin-top: 8px;
+    }
+
+    .mensagem-e-botao {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .mensagem-e-botao textarea {
+      flex: 1;
+      resize: vertical;
+    }
+
+    .icones-sociais {
+      font-size: 0;
+      margin-top: 10px;
+    }
+
+    .icones-sociais a {
+      display: inline-block;
+      font-size: 2.5rem;
+      margin: 0 15px;
       color: var(--highlight);
-      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .icones-sociais a:hover {
+      transform: translateY(-2px) scale(1.1);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      color: var(--hover);
     }
 
     footer {
       background: var(--bg-dark);
-      color: #aaa;
+      color: var(--text-light);
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
-      .section-content {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .section-content img {
-        max-width: 90%;
-      }
-
-      nav a {
-        display: inline-block;
-        margin: 10px;
-      }
+      .section-content { flex-direction: column; text-align: center; }
+      .section-content img { max-width: 90%; }
+      nav a { display: inline-block; margin: 10px; }
+      .mensagem-e-botao { flex-direction: column; align-items: stretch; }
+      .mensagem-e-botao button[type="submit"] { width: 100%; }
     }
   </style>
 </head>
@@ -180,43 +224,59 @@
 
   <section id="sobre">
     <div class="section-content">
-      <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1171&auto=format&fit=crop" alt="Ilustração sobre mim" />
+      <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1171&auto=format&fit=crop" alt="Ilustração sobre mim" data-aos="fade-up" />
       <div class="text-block">
         <h1><strong>Olá, eu sou Davi</strong></h1>
         <p>"Transformo café em código e bugs em aprendizado. Sempre em busca do próximo desafio."</p>
-        <p>"Apaixonado por programação, Futuro engenheiro de software, Back e front End, procuro aprimorar meu conhecimento cada vez mais. Minhas linguagens de programação são HTML, CSS, JS, PYTHON, Tenho conhecimento para programação em nuvem, e estou nesse ramo a mais de um ano. </p> 
-        <a href="#contato" class="btn">Fale comigo</a>
+        <p>"Apaixonado por programação, Futuro engenheiro de software, Back e front End, procuro aprimorar meu conhecimento cada vez mais. Minhas linguagens de programação são HTML, CSS, JS, PYTHON, Tenho conhecimento para programação em nuvem, e estou nesse ramo a mais de um ano."</p>
+        <a href="#contato" class="btn" data-aos="zoom-in">Fale comigo</a>
       </div>
     </div>
   </section>
 
   <section id="projetos">
     <div class="section-content">
-      <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Ilustração de projeto" />
+      <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Ilustração de projeto" data-aos="fade-up" />
       <div class="text-block">
         <h2><strong>Projetos</strong></h2>
-        <p><strong>App Academia Fitness</strong><br />
-        Projeto inicial de um aplicativo para academias, com foco em controle de treinos, metas e evolução do usuário. Desenvolvido com base em Python e integração com serviços em nuvem.</p>
-        <button class="btn" onclick="verMais()">Ver mais</button>
+        <p><strong>App Academia Fitness</strong><br>
+          Projeto inicial de um aplicativo para academias, com foco em controle de treinos, metas e evolução do usuário. Desenvolvido com base em Python e integração com serviços em nuvem.
+        </p>
+        <button class="btn" onclick="verMais()" data-aos="zoom-in">Ver mais</button>
       </div>
     </div>
   </section>
 
   <section id="contato">
     <div class="section-content">
-      <img src="https://images.unsplash.com/photo-1587560699334-bea93391dcef?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ilustração de contato" />
+      <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=400&auto=format&fit=crop" alt="Imagem vertical de contato" data-aos="fade-up" style="max-height: 500px;" />
       <div class="text-block">
         <h2><strong>Contato</strong></h2>
-        <form action="https://formsubmit.co/davistopa376@gmail.com" method="POST">
-          <input type="text" name="name" placeholder="Seu nome" required /><br />
-          <input type="email" name="email" placeholder="Seu email" required /><br />
-          <textarea name="message" rows="4" placeholder="Sua mensagem" required></textarea><br />
-          <button class="btn" type="submit">Enviar</button>
+
+        <form action="https://formspree.io/f/xrbarywk" method="POST">
+          <label for="name">Seu nome:</label>
+          <input type="text" name="name" id="name" required data-aos="fade-up">
+
+          <label for="email">Seu email:</label>
+          <input type="email" name="email" id="email" required data-aos="fade-up">
+
+          <label for="message">Sua mensagem:</label>
+          <div class="mensagem-e-botao" data-aos="fade-up">
+            <textarea name="message" id="message" rows="4" required></textarea>
+            <button type="submit" class="btn" aria-label="Enviar formulário" data-aos="zoom-in">Enviar</button>
+          </div>
         </form>
-        <div class="social-links">
-          <p>Ou me encontre aqui:</p>
-          <a href="https://github.com/Davidev3" target="_blank">GitHub</a>
-          <a href="https://linkedin.com/in/davi-stopa-a31094352" target="_blank">LinkedIn</a>
+
+        <div class="social-links" aria-label="Redes sociais" data-aos="fade-up">
+          <p style="color: var(--bg-dark); margin-top: 10px;">Ou me encontre aqui:</p>
+          <div class="icones-sociais">
+            <a href="https://github.com/Davidev3" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/davi-stopa-a31094352" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -230,21 +290,16 @@
     function verMais() {
       alert("Em breve você poderá explorar todos os detalhes do app fitness! 💪");
     }
+  </script>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        } else {
-          entry.target.classList.remove('active'); // animação reversa ao sair da tela
-        }
-      });
-    }, {
-      threshold: 0.6
-    });
-
-    document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: false,
+      duration: 800,
+      easing: 'ease-out'
     });
   </script>
 
+</body>
+</html>
