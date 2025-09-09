@@ -4,74 +4,78 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfólio Davi</title>
-
-  <!-- Fontes e bibliotecas -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
   <style>
     :root {
-      --bg-dark: #081b29;
-      --highlight: #00abf0;
-      --hover: #00abf0;
-      --text-light: #ffffff;
-      --text-dark: #333333;
-      --text-muted: #000000;
-      --section-bg1: #ffffff;
-      --section-bg2: #f1f8e9;
-      --section-bg3: #e0f7fa;
+      --bg-home: #121212;
+      --text-main: #FFFFFF;
+      --text-secondary: #CCCCCC;
+      --highlight: #00BFFF;
+      --hover-highlight: #33CCFF;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
-      width: 100%;
-      height: 100%;
-      background: var(--bg-dark);
       font-family: 'Poppins', sans-serif;
       scroll-behavior: smooth;
+      background-color: var(--bg-home);
+      color: var(--text-main);
     }
 
-    nav {
+    header {
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: var(--bg-dark);
-      padding: 1rem 0;
+      background-color: var(--bg-home);
       z-index: 1000;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 1rem 0;
     }
 
     nav a {
-      color: var(--text-light);
-      margin: 0 20px;
+      position: relative;
+      color: var(--text-main);
       text-decoration: none;
       font-weight: 600;
       font-size: 1rem;
-      transition: color 0.3s;
+      padding: 5px 0;
+      transition: color 0.3s ease;
     }
 
-    nav a:hover {
-      color: var(--highlight);
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--highlight);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
     }
+
+    nav a:hover { color: var(--hover-highlight); }
+    nav a:hover::after,
+    nav a.active::after { transform: scaleX(1); }
+    nav a.active { color: var(--highlight); }
 
     section {
       min-height: 100vh;
+      padding: 140px 40px 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 140px 40px 80px;
+      position: relative;
     }
-
-    #sobre { background-color: var(--section-bg1); color: var(--text-dark); }
-    #projetos { background-color: var(--section-bg2); color: var(--text-dark); }
-    #contato { background-color: var(--section-bg3); color: var(--text-dark); }
 
     .section-content {
       display: flex;
@@ -81,6 +85,7 @@
       align-items: center;
       justify-content: center;
       text-align: left;
+      z-index: 1;
     }
 
     .section-content img {
@@ -93,26 +98,22 @@
       flex: 1 1 400px;
     }
 
-    h1, h2 {
+    h2 {
       font-weight: 700;
       margin-bottom: 20px;
+      color: var(--text-main);
     }
-
-    h1 { font-size: 3em; }
-    h2 { font-size: 2.2em; }
 
     p {
       font-size: 1.1em;
-      color: var(--text-muted);
+      color: var(--text-secondary);
       margin-bottom: 20px;
     }
 
-    .btn,
-    button[type="submit"] {
-      padding: 1rem 1rem;
+    .btn {
+      padding: 1rem;
       font-size: 1.1rem;
       font-weight: 600;
-      text-transform: uppercase;
       background: transparent;
       color: var(--highlight);
       border: 2px solid var(--highlight);
@@ -124,243 +125,247 @@
       z-index: 1;
     }
 
-    .btn::before,
-    button[type="submit"]::before {
+    .btn::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
+      top: 0; left: 0;
+      width: 0; height: 100%;
       background: var(--highlight);
       z-index: -1;
       transition: 0.5s;
     }
 
-    .btn:hover::before,
-    button[type="submit"]:hover::before {
-      width: 100%;
+    .btn:hover::before { width: 100%; }
+    .btn:hover { color: var(--bg-home); }
+
+    .btn.glow {
+      box-shadow: 0 0 10px var(--highlight), 0 0 20px var(--highlight);
+      animation: pulse 2s infinite;
     }
 
-    .btn:hover,
-    button[type="submit"]:hover {
-      color: var(--bg-dark);
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px var(--highlight); }
+      50% { box-shadow: 0 0 20px var(--highlight); }
+      100% { box-shadow: 0 0 10px var(--highlight); }
+    }
+
+    .cursor {
+      display: inline-block;
+      animation: blink 0.7s infinite;
+      color: var(--highlight);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    #particles-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: #0a0a0a;
+    }
+
+    .skills-carousel {
+      overflow: hidden;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .carousel-track {
+      display: flex;
+      animation: scrollSkills 20s linear infinite;
+    }
+
+    .carousel-track img {
+      width: 60px;
+      margin: 0 20px;
+      transition: transform 0.3s;
+    }
+
+    .carousel-track img:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes scrollSkills {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     input, textarea {
-      padding: 10px;
-      margin: 10px 0;
       width: 100%;
-      max-width: 400px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      padding: 14px 18px;
+      font-size: 1.05rem;
       font-family: 'Poppins', sans-serif;
-      color: var(--bg-dark);
+      background-color: #2a2a2a;
+      color: var(--text-main);
+      border: 1px solid #444;
+      border-radius: 12px;
+      resize: vertical;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--highlight);
+      box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.3);
+      outline: none;
     }
 
     label {
-      display: block;
       font-size: 0.95rem;
-      color: var(--bg-dark);
-      margin-top: 8px;
-    }
-
-    .mensagem-e-botao {
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
-    }
-
-    .mensagem-e-botao textarea {
-      flex: 1;
-      resize: vertical;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
     }
 
     .icones-sociais {
-      font-size: 0;
-      margin-top: 10px;
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
     }
 
     .icones-sociais a {
-      display: inline-block;
-      font-size: 2.5rem;
-      margin: 0 15px;
-      color: var(--highlight);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
+      background-color: #2a2a2a;
+      border-radius: 50%;
+      color: var(--text-main);
+      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     }
 
     .icones-sociais a:hover {
-      transform: translateY(-2px) scale(1.1);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-      color: var(--hover);
+      transform: scale(1.1);
+      background-color: var(--highlight);
+      color: var(--bg-home);
     }
 
     footer {
-      background: var(--bg-dark);
-      color: var(--text-light);
+      background: var(--bg-home);
+      color: var(--text-secondary);
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
     }
 
     @media (max-width: 768px) {
+      nav { flex-direction: column; gap: 20px; }
       .section-content { flex-direction: column; text-align: center; }
       .section-content img { max-width: 90%; }
-      nav a { display: inline-block; margin: 10px; }
-      .mensagem-e-botao { flex-direction: column; align-items: stretch; }
-      .mensagem-e-botao button[type="submit"] { width: 100%; }
-    }
-
-    /* Modal personalizado */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-
-    .modal.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-content {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 800px;
-      width: 90%;
-      animation: slideUp 0.5s ease;
-      position: relative;
-      text-align: center;
-    }
-
-    .fechar {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    .galeria {
-      display: flex;
-      gap: 20px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .galeria img, .galeria iframe {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
-
-    .botoes {
-      margin-top: 30px;
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-    }
-
-    .btn-acao {
-      padding: 12px 20px;
-      background: linear-gradient(135deg, #00c9ff, #92fe9d);
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .btn-acao:hover {
-      transform: scale(1.05);
-    }
-
-    @keyframes slideUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      .skills-carousel { max-width: 90%; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-   <a href="#projetos">Projetos</a>
-    <a href="#contato">Contato</a>
-  </nav>
+  <header>
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#services">Serviços</a>
+      <a href="#skills">Habilidades</a>
+      <a href="#education">Educação</a>
+      <a href="#experience">Experiência</a>
+      <a href="#contact">Contato</a>
+    </nav>
+  </header>
 
-  <section id="sobre">
+  <section id="home">
+    <canvas id="particles-bg"></canvas>
     <div class="section-content">
-      <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1171&auto=format&fit=crop" alt="Ilustração sobre mim" data-aos="fade-up" />
+<img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg" alt="Home ilustrada" loading="lazy" />
       <div class="text-block">
-        <h1><strong>Olá, eu sou Davi</strong></h1>
-        <p>"Transformo café em código e bugs em aprendizado. Sempre em busca do próximo desafio."</p>
-        <p>"Apaixonado por programação, Futuro engenheiro de software, Back e front End, procuro aprimorar meu conhecimento cada vez mais. Minhas linguagens de programação são HTML, CSS, JS, PYTHON, Tenho conhecimento para programação em nuvem, e estou nesse ramo a mais de um ano."</p>
-        <a href="#contato" class="btn" data-aos="zoom-in">Fale comigo</a>
+        <h2><strong><span id="typed-text"></span><span class="cursor">|</span></strong></h2>
+        <p>Sou Davi, desenvolvedor apaixonado por transformar ideias em soluções digitais. Aqui você encontra meus projetos, habilidades e formas de contato.</p>
+        <a href="#contact" class="btn glow">Entre em contato</a>
       </div>
     </div>
   </section>
 
-  <section id="projetos">
+  <section id="services" data-aos="fade-up">
     <div class="section-content">
-      <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Ilustração de projeto" data-aos="fade-up" />
+      <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Serviços ilustrados" loading="lazy" />
       <div class="text-block">
-        <h2><strong>Projetos</strong></h2>
-        <p><strong>App Academia Fitness</strong><br>
-          Projeto inicial de um aplicativo para academias, com foco em controle de treinos, metas e evolução do usuário. Desenvolvido com base em Python e integração com serviços em nuvem.
-        </p>
-        <button class="btn" id="verMaisBtn" data-aos="zoom-in">Ver mais</button>
+        <h2><strong>Serviços</strong></h2>
+        <p>Desenvolvimento de sites responsivos, criação de APIs, integração com bancos de dados e automações com Python. Também ofereço consultoria para projetos web e prototipagem de interfaces.</p>
       </div>
     </div>
   </section>
 
-  <section id="contato">
+  <section id="skills" data-aos="fade-up">
     <div class="section-content">
-      <img src="https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg" alt="Imagem vertical de contato" data-aos="fade-up" style="max-height: 500px;" />
+      <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg" alt="Skills ilustradas" loading="lazy" />
       <div class="text-block">
+        <h2><strong>Minhas Skills</strong></h2>
+        <p>Domino tecnologias como HTML, CSS, JavaScript, Python e ferramentas modernas de desenvolvimento. Estou sempre aprendendo e aplicando novas soluções em projetos reais.</p>
+        <p>Essas são as tecnologias que venho dominando e aplicando nos meus projetos:</p>
+        <div class="skills-carousel">
+          <div class="carousel-track">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" data-aos="fade-up">
+    <div class="section-content">
+      <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg" alt="Educação ilustrada" loading="lazy" />
+      <div class="text-block">
+        <h2><strong>Educação</strong></h2>
+        <p>Minha jornada de aprendizado é marcada por experiências práticas e formações que moldaram minha visão como desenvolvedor. Já estudei na <strong>Santander Open Academy</strong> e no <strong>SENAI</strong>, onde aprimorei minhas habilidades técnicas com foco em desenvolvimento web e lógica de programação.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" data-aos="fade-up">
+    <div class="section-content">
+      <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg" alt="Experiência ilustrada" loading="lazy" />
+      <div class="text-block">
+        <h2><strong>Experiência</strong></h2>
+        <p>Atuo há mais de um ano em projetos independentes e colaborativos, desenvolvendo interfaces, APIs e sistemas completos. Tenho experiência com versionamento de código (Git), integração com serviços em nuvem e deploy de aplicações web. Também já participei de hackathons e desafios técnicos que exigiram criatividade e agilidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <div class="section-content">
+      <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg" alt="Contato ilustrado" loading="lazy" />
+      <div class="text-block" style="max-width: 600px; width: 100%;">
         <h2><strong>Contato</strong></h2>
-
-        <form action="https://formspree.io/f/xrbarywk" method="POST">
+        <form action="https://formspree.io/f/xrbarywk" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
           <label for="name">Seu nome:</label>
-          <input type="text" name="name" id="name" required data-aos="fade-up">
+          <input type="text" name="name" id="name" required>
 
           <label for="email">Seu email:</label>
-          <input type="email" name="email" id="email" required data-aos="fade-up">
+          <input type="email" name="email" id="email" required>
 
           <label for="message">Sua mensagem:</label>
-          <div class="mensagem-e-botao" data-aos="fade-up">
-            <textarea name="message" id="message" rows="4" required></textarea>
-            <button type="submit" class="btn" aria-label="Enviar formulário" data-aos="zoom-in">Enviar</button>
-          </div>
+          <textarea name="message" id="message" rows="5" required></textarea>
+
+          <button type="submit" class="btn" style="width: 100%;">Enviar</button>
         </form>
 
-        <div class="social-links" aria-label="Redes sociais" data-aos="fade-up">
-          <p style="color: var(--bg-dark); margin-top: 10px;">Ou me encontre aqui:</p>
+        <div class="social-links">
+          <p style="margin-top: 30px; text-align: center;">Ou me encontre aqui:</p>
           <div class="icones-sociais">
-            <a href="https://github.com/Davidev3" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <i class="fab fa-github"></i>
+            <a href="https://github.com/Davidev3" target="_blank" aria-label="GitHub">
+              <i class="fa-brands fa-github"></i>
             </a>
-            <a href="https://linkedin.com/in/davi-stopa-a31094352" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i class="fab fa-linkedin"></i>
+            <a href="https://linkedin.com/in/davi-stopa-a31094352" target="_blank" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
             </a>
           </div>
         </div>
@@ -372,50 +377,79 @@
     &copy; 2025 Davi. Todos os direitos reservados.
   </footer>
 
-  <!-- Modal com conteúdo extra -->
-  <div id="modalProjeto" class="modal">
-    <div class="modal-content">
-      <span class="fechar">&times;</span>
-      <h2>Mais sobre o App</h2>
-      <p>Veja abaixo algumas telas e vídeos que mostram como o projeto funciona na prática:</p>
-
-      <div class="galeria">
-        <img src="https://via.placeholder.com/350x200.png?text=Tela+do+App" alt="Tela do app" />
-        <iframe src="https://www.youtube.com/embed/Z-3z9aCZY6Y" title="Vídeo do projeto" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <div class="botoes">
-        <button class="btn-acao">Ver código</button>
-        <button class="btn-acao">Abrir protótipo</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script>
-    const verMaisBtn = document.getElementById('verMaisBtn');
-    const modal = document.getElementById('modalProjeto');
-    const fechar = document.querySelector('.fechar');
-
-    verMaisBtn.addEventListener('click', () => {
-      modal.classList.toggle('show');
-      verMaisBtn.textContent = modal.classList.contains('show') ? 'Ver menos' : 'Ver mais';
-    });
-
-    fechar.addEventListener('click', () => {
-      modal.classList.remove('show');
-      verMaisBtn.textContent = 'Ver mais';
-    });
-  </script>
-
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({
-      once: false,
-      duration: 800,
-      easing: 'ease-out'
+    AOS.init({ once: false, duration: 800, easing: 'ease-out' });
+
+    const text = "Bem-vindo ao meu portfólio";
+    let i = 0;
+    const speed = 100;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typed-text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    typeWriter();
+
+    const canvas = document.getElementById("particles-bg");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00BFFF";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").includes(current)) {
+          link.classList.add("active");
+        }
+      });
     });
   </script>
-
 </body>
 </html>
